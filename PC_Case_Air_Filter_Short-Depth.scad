@@ -318,8 +318,8 @@ module Shroud(){
 module FilterAndFanMount(){
     difference() {
         union() {
-            *translate([0,0,30])fanMount();
-            pressurePlate();
+            translate([0,0,30])fanMount();
+            *pressurePlate();
             *basePlate2();
 
             
