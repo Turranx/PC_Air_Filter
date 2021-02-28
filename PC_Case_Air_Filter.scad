@@ -189,10 +189,6 @@ module fanMount(fanSize=80){
                 X3 = fanMountingHoleDistance_(fanSize)/2;
                 Y3 = fanMountingHoleDistance_(fanSize)/2;
                 Z3 = -1;
-
-                echo(fanSize);
-                echo(X3);
-                echo(Y3);
                 
                 color("pink")     translate([+X3,+Y3,Z3])countersinkNumber6Nut();
                 color("seagreen") translate([+X3,-Y3,Z3])countersinkNumber6Nut();
@@ -324,13 +320,13 @@ module fanCover(fanSize=80){
                 
                 // Hole For Wire
                 // Fans have wires in different locations, so multiple holes
-                translate([+(fanWidth/2-15),-43,5.01])
-                cube([7,30,fanBoxHeight-10],center=true);
+                translate([+(fanWidth/2-15),-53,5.01])
+                cube([7,60,fanBoxHeight-10],center=true);
                 
                 // Hole For Wire
                 // Fans have wires in different locations, so multiple holes
-                translate([-(fanWidth/2-15),-43,5.01])
-                cube([7,30,fanBoxHeight-10],center=true);
+                translate([-(fanWidth/2-15),-53,5.01])
+                cube([7,60,fanBoxHeight-10],center=true);
 
                 // Exhaust Hole
                 translate([0,0,20])
@@ -380,9 +376,10 @@ module FanHole(fanSize,blobHeight1=20) {
     };
 };
 
-fanSize_ = 120;  // Acceptable Values: 120, 92, 80, 70
+fanSize_ = 70;  // Acceptable Values: 120, 92, 80, 70
 difference() {
     union() {
+        // Covers the egress side of the fan
         translate([0,0,110]) fanCover(fanSize_);
 
         // Adding a Gap Filler Under The Fan Cover
@@ -394,9 +391,9 @@ difference() {
             cube([fanSize_,fanSize_,100],center=true);
         };    
 
-        translate([0,0,30])fanMount(fanSize_);  
-        pressurePlate();
-        basePlate2();
+        *translate([0,0,30])fanMount(fanSize_);  
+        *pressurePlate();
+        *basePlate2();
         
         *translate([0,0,21])rotate([180,0,0])filter();
     };
